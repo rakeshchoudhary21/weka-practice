@@ -1,2 +1,0 @@
-weka.classifiers.meta.AdaBoostM1 -P 100 -S 1 -I 10 -W weka.classifiers.trees.DecisionStump
-weka.classifiers.trees.DecisionStump 

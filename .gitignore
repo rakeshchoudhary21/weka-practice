@@ -88,3 +88,4 @@ gradlew.bat
 settings.gradle
 src/main/java/Library.java
 src/test/
+src/main/resources/esTemp/
