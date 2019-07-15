@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class KddCupProblem {
 
-    private static final String PATH_TO_DATA = "/home/rakesh/Desktop/MachineLearningJava/WekaPractice/src/main/resources/";
+    private static final String PATH_TO_DATA = "/Users/r0c0334/Desktop/Weka/weka-practice/src/main/resources/";
 
     public static Instances loadData(String pathToData, String pathToLabels) throws Exception{
         CSVLoader csvLoader = new CSVLoader();

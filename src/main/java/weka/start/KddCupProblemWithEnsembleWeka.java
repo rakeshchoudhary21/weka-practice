@@ -7,6 +7,7 @@ import weka.classifiers.Classifier;
 import weka.classifiers.EnsembleLibrary;
 
 import weka.classifiers.Evaluation;
+import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.meta.EnsembleSelection;
 import weka.core.Instances;
 import weka.core.converters.CSVLoader;
@@ -20,7 +21,7 @@ import java.util.Random;
 
 public class KddCupProblemWithEnsembleWeka {
 
-    private static final String PATH_TO_DATA = "/home/rakesh/Desktop/MLJava/WekaPractice/src/main/resources/";
+    private static final String PATH_TO_DATA = "/Users/r0c0334/Desktop/Weka/weka-practice/src/main/resources/";
 
     public static Instances loadData(String pathToData, String pathToLabels) throws Exception{
         CSVLoader csvLoader = new CSVLoader();
@@ -79,7 +80,7 @@ public class KddCupProblemWithEnsembleWeka {
             Instances trainData = loadData(PATH_TO_DATA+"orange_small_train.data",
                     PATH_TO_DATA+"orange_small_train_"+labelFiles[i]+".labels.txt");
             Evaluation evaluation = new Evaluation(trainData);
-            evaluation.crossValidateModel(model,trainData,5,new Random(1));
+            evaluation.crossValidateModel(model,trainData,2,new Random(1));
             results[i] = evaluation.areaUnderROC(trainData.classAttribute().indexOfValue("1"));
             System.out.println(results[i]);
             overallScore+= results[i];
@@ -122,9 +123,11 @@ public class KddCupProblemWithEnsembleWeka {
                 "-S","1",
                 "-D","true"
         });
-        //evaluate(new NaiveBayes());
-
-        double[] resES = evaluate(ensembleSelection);
-        System.out.println("churn:"+resES[0]+"\nappetency:"+resES[1]+"\nupsell:"+resES[2]);
+        double[] nBays = evaluate(new NaiveBayes());
+        System.out.println("Naive bays result:");
+        System.out.println("churn:"+nBays[0]+"\nappetency:"+nBays[1]+"\nupsell:"+nBays[2]);
+        System.out.println("=========");
+        //double[] resES = evaluate(ensembleSelection);
+        //System.out.println("churn:"+resES[0]+"\nappetency:"+resES[1]+"\nupsell:"+resES[2]);
     }
 }

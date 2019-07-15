@@ -5,7 +5,6 @@ import weka.attributeSelection.InfoGainAttributeEval;
 import weka.attributeSelection.Ranker;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
-import weka.classifiers.lazy.IBk;
 import weka.classifiers.trees.J48;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
@@ -23,7 +22,7 @@ import java.util.Random;
 public class WekaStarter {
 
     public static void main(String[] args) throws Exception{
-        DataSource dataSource = new DataSource("/home/rakesh/Desktop/MLJava/WekaPractice/src/main/resources/zoo.arff");
+        DataSource dataSource = new DataSource("/Users/r0c0334/Desktop/Weka/weka-practice/src/main/resources/zoo.arff");
         Instances data = dataSource.getDataSet();
         System.out.println(data.numInstances()+"\t instances loaded");
 

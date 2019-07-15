@@ -15,7 +15,7 @@ public class RegressionModelWeka {
 
     public static void main(String[] args) throws Exception{
         CSVLoader csvLoader = new CSVLoader();
-        csvLoader.setSource(new File("/home/rakesh/Desktop/MachineLearningJava/WekaPractice/src/main/resources/ENB2012_data.csv"));
+        csvLoader.setSource(new File("/Users/r0c0334/Desktop/Weka/weka-practice/src/main/resources/ENB2012_data.csv"));
         Instances instances = csvLoader.getDataSet();
         System.out.println(instances.numInstances()+"\t instances loaded");
 
