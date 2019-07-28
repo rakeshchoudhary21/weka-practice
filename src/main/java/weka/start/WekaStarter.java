@@ -22,7 +22,7 @@ import java.util.Random;
 public class WekaStarter {
 
     public static void main(String[] args) throws Exception{
-        DataSource dataSource = new DataSource("/Users/r0c0334/Desktop/Weka/weka-practice/src/main/resources/zoo.arff");
+        DataSource dataSource = new DataSource("/Users/r0c0334/Desktop/Weka/weka-practice/src/main/resources/data/zoo.arff");
         Instances data = dataSource.getDataSet();
         System.out.println(data.numInstances()+"\t instances loaded");
 

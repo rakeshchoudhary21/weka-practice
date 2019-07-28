@@ -13,7 +13,10 @@
 >
 
 <object class="java.util.Vector" name="__root__" version="3.9.3">
-   <object class="weka.classifiers.meta.AdaBoostM1" name="0">
+   <object class="weka.classifiers.bayes.NaiveBayes" name="0">
+      <object array="yes" class="java.lang.String" name="options"/>
+   </object>
+   <object class="weka.classifiers.meta.AdaBoostM1" name="1">
       <object array="yes" class="java.lang.String" name="options">
          <object class="java.lang.String" name="0">-P</object>
          <object class="java.lang.String" name="1">100</object>
@@ -25,7 +28,17 @@
          <object class="java.lang.String" name="7">weka.classifiers.trees.DecisionStump</object>
       </object>
    </object>
-   <object class="weka.classifiers.trees.DecisionStump" name="1">
+   <object class="weka.classifiers.trees.DecisionStump" name="2">
       <object array="yes" class="java.lang.String" name="options"/>
+   </object>
+   <object class="weka.classifiers.trees.J48" name="3">
+      <object array="yes" class="java.lang.String" name="options">
+         <object class="java.lang.String" name="0">-S</object>
+         <object class="java.lang.String" name="1">-C</object>
+         <object class="java.lang.String" name="2">0.25</object>
+         <object class="java.lang.String" name="3">-B</object>
+         <object class="java.lang.String" name="4">-M</object>
+         <object class="java.lang.String" name="5">2</object>
+      </object>
    </object>
 </object>

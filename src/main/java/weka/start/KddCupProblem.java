@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class KddCupProblem {
 
-    private static final String PATH_TO_DATA = "/Users/r0c0334/Desktop/Weka/weka-practice/src/main/resources/";
+    private static final String PATH_TO_DATA = "/Users/r0c0334/Desktop/Weka/weka-practice/src/main/resources/data/";
 
     public static Instances loadData(String pathToData, String pathToLabels) throws Exception{
         CSVLoader csvLoader = new CSVLoader();
@@ -35,7 +35,7 @@ public class KddCupProblem {
         Instances labels = csvLoader.getDataSet();
         Instances labeledData = Instances.mergeInstances(filteredData,labels);
         labeledData.setClassIndex(labeledData.numAttributes()-1);
-        //System.out.println(labeledData.toSummaryString());
+        System.out.println(labeledData.toSummaryString());
         return labeledData;
     }
 
@@ -45,16 +45,16 @@ public class KddCupProblem {
         String[] labelFiles = new String[]{"churn","appetency","upselling"};
         double overallScore = 0.0;
         for(int i=0;i<labelFiles.length;i++){
-            Instances trainData = loadData(PATH_TO_DATA+"orange_small_train.data",
+            Instances trainData = loadData(PATH_TO_DATA+ "orange_small_train.data",
                     PATH_TO_DATA+"orange_small_train_"+labelFiles[i]+".labels.txt");
             Evaluation evaluation = new Evaluation(trainData);
             evaluation.crossValidateModel(model,trainData,5,new Random(1));
             results[i] = evaluation.areaUnderROC(trainData.classAttribute().indexOfValue("1"));
-            System.out.println(results[i]);
+            System.out.println(labelFiles[i]+" Score:\t"+results[i]);
             overallScore+= results[i];
         }
 
-        System.out.println(overallScore/3);
+        System.out.println("Average Score:\t"+overallScore/3);
         return results;
     }
     public static void main(String[] args) throws Exception{

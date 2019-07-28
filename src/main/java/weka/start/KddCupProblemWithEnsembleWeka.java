@@ -21,7 +21,7 @@ import java.util.Random;
 
 public class KddCupProblemWithEnsembleWeka {
 
-    private static final String PATH_TO_DATA = "/Users/r0c0334/Desktop/Weka/weka-practice/src/main/resources/";
+    private static final String PATH_TO_DATA = "/Users/r0c0334/Desktop/Weka/weka-practice/src/main/resources/data/";
 
     public static Instances loadData(String pathToData, String pathToLabels) throws Exception{
         CSVLoader csvLoader = new CSVLoader();
@@ -77,12 +77,12 @@ public class KddCupProblemWithEnsembleWeka {
         String[] labelFiles = new String[]{"churn","appetency","upselling"};
         double overallScore = 0.0;
         for(int i=0;i<labelFiles.length;i++){
-            Instances trainData = loadData(PATH_TO_DATA+"orange_small_train.data",
+            Instances trainData = loadData(PATH_TO_DATA+ "orange_small_train.data",
                     PATH_TO_DATA+"orange_small_train_"+labelFiles[i]+".labels.txt");
             Evaluation evaluation = new Evaluation(trainData);
             evaluation.crossValidateModel(model,trainData,2,new Random(1));
             results[i] = evaluation.areaUnderROC(trainData.classAttribute().indexOfValue("1"));
-            System.out.println(results[i]);
+            //System.out.println(results[i]);
             overallScore+= results[i];
         }
 
@@ -92,9 +92,9 @@ public class KddCupProblemWithEnsembleWeka {
     public static void main(String[] args) throws Exception{
 
         EnsembleLibrary ensembleLibrary = new EnsembleLibrary();
-        //ensembleLibrary.addModel("weka.classifiers.trees.J48 -S -C 0.25 -B -M 2");
+        ensembleLibrary.addModel("weka.classifiers.trees.J48 -S -C 0.25 -B -M 2");
         //ensembleLibrary.addModel("weka.classifiers.trees.J48 -S -C 0.25 -B -M 2 -A");
-        //ensembleLibrary.addModel("weka.classifiers.bayes.NaiveBayes");
+        ensembleLibrary.addModel("weka.classifiers.bayes.NaiveBayes");
         //ensembleLibrary.addModel("weka.classifiers.lazy.IBk");
         //ensembleLibrary.addModel("weka.classifiers.functions.SimpleLogistic");
         //ensembleLibrary.addModel("weka.classifiers.functions.SMO");
@@ -102,12 +102,12 @@ public class KddCupProblemWithEnsembleWeka {
         //ensembleLibrary.addModel("weka.classifiers.meta.LogitBoost");
         ensembleLibrary.addModel("weka.classifiers.trees.DecisionStump");
 
-        EnsembleLibrary.saveLibrary(new File(PATH_TO_DATA+"ensembleLib.model.xml"),ensembleLibrary,null);
+        EnsembleLibrary.saveLibrary(new File(PATH_TO_DATA+ "data/ensembleLib.model.xml"),ensembleLibrary,null);
         System.out.println(ensembleLibrary.getModels());
 
         EnsembleSelection ensembleSelection = new EnsembleSelection();
         ensembleSelection.setOptions(new String[]{
-                "-L",PATH_TO_DATA+"ensembleLib.model.xml",
+                "-L",PATH_TO_DATA+ "data/ensembleLib.model.xml",
                 "-W",PATH_TO_DATA+"esTmp",
                 "-B","10",
                 "-E","1.0",
@@ -127,7 +127,7 @@ public class KddCupProblemWithEnsembleWeka {
         System.out.println("Naive bays result:");
         System.out.println("churn:"+nBays[0]+"\nappetency:"+nBays[1]+"\nupsell:"+nBays[2]);
         System.out.println("=========");
-        //double[] resES = evaluate(ensembleSelection);
-        //System.out.println("churn:"+resES[0]+"\nappetency:"+resES[1]+"\nupsell:"+resES[2]);
+        double[] resES = evaluate(ensembleSelection);
+        System.out.println("churn:"+resES[0]+"\nappetency:"+resES[1]+"\nupsell:"+resES[2]);
     }
 }
